@@ -7,3 +7,6 @@ twitter-to-kafka-service:
     - Kafka
     - Elasticsearch
   welcome-message: Welcome to microservices-demo
+  enable-mock-tweets: true
+  mock-min-tweet-length: 15
+  mock-sleep-ms: 10000

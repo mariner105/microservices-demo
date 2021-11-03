@@ -13,4 +13,8 @@ public class TwitterToKafkaServiceConfigData {
     //These fields are from application.yml
     private List<String> twitterKeywords;
     private String welcomeMessage;
+    private Boolean enableMockTweets;
+    private Long mockSleepMS;
+    private Integer mockMinTweetLength;
+    private Integer mockMaxTweetLength;
 }
