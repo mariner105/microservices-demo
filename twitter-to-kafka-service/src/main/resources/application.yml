@@ -1,0 +1,9 @@
+twitter-to-kafka-service:
+  #See how we access these values in TwitterToKafkaServiceConfigData.java
+  twitter-keywords:
+    - Java
+    - Microservices
+    - Spring
+    - Kafka
+    - Elasticsearch
+  welcome-message: Welcome to microservices-demo
