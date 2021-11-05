@@ -1,4 +1,4 @@
-package com.microservices.demo.twitter.to.kafka.service.impl;
+package com.microservices.demo.twitter.to.kafka.service.runner.impl;
 
 import com.microservices.demo.config.TwitterToKafkaServiceConfigData;
 import com.microservices.demo.twitter.to.kafka.service.listener.TwitterKafkaStatusListener;
@@ -14,15 +14,17 @@ import twitter4j.TwitterStreamFactory;
 
 import javax.annotation.PreDestroy;
 import java.util.Arrays;
-@Component
-@ConditionalOnProperty(name = "twitter-to-kafka-service.enable-mock-tweets",
-        havingValue = "false", matchIfMissing = true)
 
+@Component
+@ConditionalOnProperty(name = "twitter-to-kafka-service.enable-mock-tweets", havingValue = "false", matchIfMissing = true)
 public class TwitterKafkaStreamRunner implements StreamRunner {
+
     private static final Logger LOG = LoggerFactory.getLogger(TwitterKafkaStreamRunner.class);
 
     private final TwitterToKafkaServiceConfigData twitterToKafkaServiceConfigData;
+
     private final TwitterKafkaStatusListener twitterKafkaStatusListener;
+
     private TwitterStream twitterStream;
 
     public TwitterKafkaStreamRunner(TwitterToKafkaServiceConfigData configData,
@@ -47,11 +49,9 @@ public class TwitterKafkaStreamRunner implements StreamRunner {
     }
 
     private void addFilter() {
-        String[] keywords = twitterToKafkaServiceConfigData
-                .getTwitterKeywords().toArray(new String[0]);
+        String[] keywords = twitterToKafkaServiceConfigData.getTwitterKeywords().toArray(new String[0]);
         FilterQuery filterQuery = new FilterQuery(keywords);
         twitterStream.filter(filterQuery);
-        LOG.info("Started filtering twitter stream for keywords {}",
-                Arrays.toString(keywords));
+        LOG.info("Started filtering twitter stream for keywords {}", Arrays.toString(keywords));
     }
 }
