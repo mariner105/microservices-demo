@@ -217,7 +217,7 @@ public class TwitterAnalyticsAvroModel extends org.apache.avro.specific.Specific
 
     /** Creates a new Builder */
     private Builder() {
-      super(SCHEMA$, MODEL$);
+      super(SCHEMA$);
     }
 
     /**
@@ -245,7 +245,7 @@ public class TwitterAnalyticsAvroModel extends org.apache.avro.specific.Specific
      * @param other The existing instance to copy.
      */
     private Builder(com.microservices.demo.kafka.avro.model.TwitterAnalyticsAvroModel other) {
-      super(SCHEMA$, MODEL$);
+      super(SCHEMA$);
       if (isValidValue(fields()[0], other.word)) {
         this.word = data().deepCopy(fields()[0].schema(), other.word);
         fieldSetFlags()[0] = true;
