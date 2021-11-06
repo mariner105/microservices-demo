@@ -71,21 +71,19 @@ public class MockKafkaStreamRunner implements StreamRunner {
 
     private static final String TWITTER_STATUS_DATE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
 
-    public MockKafkaStreamRunner(TwitterToKafkaServiceConfigData twitterToKafkaServiceConfigData,
-                                 TwitterKafkaStatusListener twitterKafkaStatusListener) {
-        this.twitterToKafkaServiceConfigData = twitterToKafkaServiceConfigData;
-        this.twitterKafkaStatusListener = twitterKafkaStatusListener;
+    public MockKafkaStreamRunner(TwitterToKafkaServiceConfigData configData,
+                                 TwitterKafkaStatusListener statusListener) {
+        this.twitterToKafkaServiceConfigData = configData;
+        this.twitterKafkaStatusListener = statusListener;
     }
 
     @Override
     public void start() throws TwitterException {
-        String[] keywords = twitterToKafkaServiceConfigData
-                .getTwitterKeywords().toArray(new String[0]);
-        int minTweetLength = twitterToKafkaServiceConfigData.getMockMinTweetLength();
-        int maxTweetLength = twitterToKafkaServiceConfigData.getMockMaxTweetLength();
+        final String[] keywords = twitterToKafkaServiceConfigData.getTwitterKeywords().toArray(new String[0]);
+        final int minTweetLength = twitterToKafkaServiceConfigData.getMockMinTweetLength();
+        final int maxTweetLength = twitterToKafkaServiceConfigData.getMockMaxTweetLength();
         long sleepTimeMs = twitterToKafkaServiceConfigData.getMockSleepMs();
-        LOG.info("Starting mock filtering twitter streams for keywords {}",
-                Arrays.toString(keywords));
+        LOG.info("Starting mock filtering twitter streams for keywords {}", Arrays.toString(keywords));
         simulateTwitterStream(keywords, minTweetLength, maxTweetLength, sleepTimeMs);
     }
 
@@ -109,7 +107,7 @@ public class MockKafkaStreamRunner implements StreamRunner {
         try {
             Thread.sleep(sleepTimeMs);
         } catch (InterruptedException e) {
-            throw new TwitterToKafkaServiceException("Error while sleeping for waiting new status to create!");
+            throw new TwitterToKafkaServiceException("Error while sleeping for waiting new status to create!!");
         }
     }
 
@@ -117,7 +115,7 @@ public class MockKafkaStreamRunner implements StreamRunner {
        String[] params = new String[] {
                ZonedDateTime.now().format(DateTimeFormatter.ofPattern(TWITTER_STATUS_DATE_FORMAT, Locale.ENGLISH)),
                String.valueOf(ThreadLocalRandom.current().nextLong(Long.MAX_VALUE)),
-               getRandomTweetContext(keywords, minTweetLength, maxTweetLength),
+                getRandomTweetContent(keywords, minTweetLength, maxTweetLength),
                String.valueOf(ThreadLocalRandom.current().nextLong(Long.MAX_VALUE))
        };
         return formatTweetAsJsonWithParams(params);
@@ -132,7 +130,7 @@ public class MockKafkaStreamRunner implements StreamRunner {
         return tweet;
     }
 
-    private String getRandomTweetContext(String[] keywords, int minTweetLength, int maxTweetLength) {
+    private String getRandomTweetContent(String[] keywords, int minTweetLength, int maxTweetLength) {
        StringBuilder tweet = new StringBuilder();
        int tweetLength = RANDOM.nextInt(maxTweetLength - minTweetLength + 1) + minTweetLength;
         return constructRandomTweet(keywords, tweet, tweetLength);

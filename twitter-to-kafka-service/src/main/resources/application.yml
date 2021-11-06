@@ -3,25 +3,24 @@ twitter-to-kafka-service:
   twitter-keywords:
     - Java
     - Microservices
-    - Spring
     - Kafka
     - Elasticsearch
-  welcome-message: Welcome to microservices-demo
+  welcome-message: Hello microservices!
   enable-mock-tweets: false
   mock-min-tweet-length: 5
   mock-max-tweet-length: 15
   mock-sleep-ms: 10000
 
   retry-config:
-    initial-interval: 1000
-    max-interval: 1000
+  initial-interval-ms: 1000
+  max-interval-ms: 10000
     multiplier: 2.0
     maxAttempts: 3
     sleep-time-ms: 2000
     
   kafka-config:
     bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
-    schema-registryUrlKey: schema.registry.url
+  schema-registry-url-key: schema.registry.url
     schema-registry-url: http://localhost:8081
     topic-name: twitter-topic
     topic-names-to-create:
@@ -40,8 +39,3 @@ kafka-producer-config:
   request-timeout-ms: 60000
   retry-count: 5
 
-spring:
-  cloud:
-    config:
-      import-check:
-        enabled: false
