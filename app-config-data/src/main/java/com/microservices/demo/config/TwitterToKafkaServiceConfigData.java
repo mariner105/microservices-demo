@@ -10,7 +10,6 @@ import java.util.List;
 @Configuration
 @ConfigurationProperties(prefix = "twitter-to-kafka-service")
 public class TwitterToKafkaServiceConfigData {
-    //These fields are from application.yml
     private List<String> twitterKeywords;
     private String welcomeMessage;
     private Boolean enableMockTweets;
