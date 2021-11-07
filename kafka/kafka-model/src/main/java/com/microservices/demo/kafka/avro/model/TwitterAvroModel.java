@@ -15,8 +15,6 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = -5190598237215532904L;
-
-
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TwitterAvroModel\",\"namespace\":\"com.microservices.demo.kafka.avro.model\",\"fields\":[{\"name\":\"userId\",\"type\":\"long\"},{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"text\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"createdAt\",\"type\":[\"null\",\"long\"],\"logicalType\":[\"null\",\"date\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
@@ -73,10 +71,10 @@ public class TwitterAvroModel extends org.apache.avro.specific.SpecificRecordBas
     return DECODER.decode(b);
   }
 
-  private long userId;
-  private long id;
-  private java.lang.String text;
-  private java.lang.Long createdAt;
+   private long userId;
+   private long id;
+   private java.lang.String text;
+   private java.lang.Long createdAt;
 
   /**
    * Default constructor.  Note that this does not initialize fields
