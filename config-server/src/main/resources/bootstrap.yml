@@ -5,6 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: file://D:\FranksUdemyTraining\EventDrivenMicroservices\microservices-demo\config-server-repository
+          uri: https://github.com/mariner105/spring-cloud-config-server-repository
+          default-label: master #my main Git branch is master
           clone-on-start: true
     fail-fast: true
