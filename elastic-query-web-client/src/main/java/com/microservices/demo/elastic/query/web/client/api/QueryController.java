@@ -36,7 +36,7 @@ public class QueryController {
     }
 
     @PostMapping("/query-by-text")
-    public String queryByText(metrics ElasticQueryWebClientRequestModel requestModel,
+    public String queryByText(@Valid ElasticQueryWebClientRequestModel requestModel,
                               Model model) {
         LOG.info("Querying with text {}", requestModel.getText());
         List<ElasticQueryWebClientResponseModel> responseModels = new ArrayList<>();
