@@ -1,6 +1,8 @@
 #!/bin/bash
-
-# Build Docker images via mvn install
+# Note: docker must be listening on port 2376 for these builds to work.
+#  Ubuntu does not have docker listen on a TCP port by default for security
+#  reasons.
+#  See restart-docker.sh to see how to set docker to listen on 2376.
 
 cd ../config-server || exit
 pwd
