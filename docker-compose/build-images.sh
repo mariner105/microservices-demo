@@ -16,7 +16,15 @@ cd ../elastic-query-web-client || exit
 pwd
 mvn install -DskipTests
 
+cd ../elastic-query-web-client-2 || exit
+pwd
+mvn install -DskipTests
+
 cd ../kafka-to-elastic-service || exit
+pwd
+mvn install -DskipTests
+
+cd ../kafka-streams-service || exit
 pwd
 mvn install -DskipTests
 
