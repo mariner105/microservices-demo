@@ -5,6 +5,8 @@ services:
     image: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     environment:
       - "POSTGRES_DB=keycloak"
       - "POSTGRES_USER=keycloak"
@@ -116,6 +118,7 @@ services:
       - elastic-1
       - elastic-2
       - elastic-3
+    # https://stackoverflow.com/questions/37694987/connecting-to-postgresql-in-a-docker-container-from-outside
     environment:
       - "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5008 -Xms128m -Xmx256m"
       - "LOGGING_LEVEL_COM_MICROSERVICES_DEMO=debug"
@@ -128,7 +131,7 @@ services:
       - "SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm"
       - "SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm/protocol/openid-connect/certs"
       - "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm/protocol/openid-connect/token"
-      - "SPRING_DATASOURCE_URL=jdbc:postgresql:postgres:5432/postgres?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://127.0.0.1:5432/postgres?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true"
       - "ELASTIC-QUERY-SERVICE_QUERY-FROM-KAFKA-STATE-STORE_URI=http://kafka-streams-service:8187/kafka-streams-service/get-word-count-by-word/{word}"
       - "ENCRYPT_KEY=${ENCRYPT_KEY}"
     networks:
@@ -161,7 +164,7 @@ services:
       - "SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm"
       - "SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm/protocol/openid-connect/certs"
       - "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm/protocol/openid-connect/token"
-      - "SPRING_DATASOURCE_URL=jdbc:postgresql:postgres:5432/postgres?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://127.0.0.1:5432/postgres?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true"
       - "SPRING_DATASOURCE_INITIALIZATION-MODE=never"
       - "ELASTIC-QUERY-SERVICE_QUERY-FROM-KAFKA-STATE-STORE_URI=http://kafka-streams-service:8187/kafka-streams-service/get-word-count-by-word/{word}"
       - "ENCRYPT_KEY=${ENCRYPT_KEY}"
