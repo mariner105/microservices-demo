@@ -4,7 +4,15 @@
 #  reasons.
 #  See restart-docker.sh to see how to set docker to listen on 2376.
 
+cd ../analytics-service || exit
+pwd
+mvn install -DskipTests
+
 cd ../config-server || exit
+pwd
+mvn install -DskipTests
+
+cd ../discovery-service || exit
 pwd
 mvn install -DskipTests
 
@@ -20,11 +28,15 @@ cd ../elastic-query-web-client-2 || exit
 pwd
 mvn install -DskipTests
 
-cd ../kafka-to-elastic-service || exit
+cd ../gateway-service || exit
 pwd
 mvn install -DskipTests
 
 cd ../kafka-streams-service || exit
+pwd
+mvn install -DskipTests
+
+cd ../kafka-to-elastic-service || exit
 pwd
 mvn install -DskipTests
 
@@ -39,4 +51,3 @@ mvn install -DskipTests
 cd ../twitter-to-kafka-service || exit
 pwd
 mvn install -DskipTests
-

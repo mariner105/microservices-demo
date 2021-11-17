@@ -1,4 +1,9 @@
 version: '3.7'
+
+volumes:
+  postgres_data:
+    driver: local
+
 services:
   #Need to run postgreSQL in Docker as work-around for Ubuntu
   postgres:
