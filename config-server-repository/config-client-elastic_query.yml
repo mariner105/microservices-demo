@@ -38,7 +38,6 @@ spring:
         registration:
           keycloak:
             client-id: 'elastic-query-service'
-	    #TODO use the cipher for my keycloak client
             client-secret: '{cipher}87191dde8d9944c470ffe0f00f17134d40f659756915af9c8a9bc5dab0b80f8a71acf1d94642151714b37017648883a6a7ca4a995db650bb734b7a60c19ed110'
             authorizationGrantType: client_credentials
         provider:
@@ -82,4 +81,16 @@ springdoc:
     path: /swagger-ui.html
 
 security:
-  paths-to-ignore: /api-docs
+  paths-to-ignore: /api-docs, /actuator/**
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure.include: health, prometheus
+      path-mapping.prometheus: metrics
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      cache.time-to-live: 1ms
